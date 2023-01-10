@@ -1,4 +1,4 @@
-FROM nipreps/fmriprep:20.2.6
+FROM nipreps/fmriprep:20.2.3
 
 LABEL maintainer="support@flywheel.io"
 
