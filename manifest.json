@@ -351,13 +351,13 @@
         }
     },
     "custom": {
-        "docker-image": "lsherbakov/bids-fmriprep:1.2.5_20.2.6_inc1.7",
+        "docker-image": "amhe4269/bids-fmriprep:1.2.5_23.0.1_inc1.8",
         "flywheel": {
             "suite": "Preprocessing"
         },
         "gear-builder": {
             "category": "analysis",
-            "image": "lsherbakov/bids-fmriprep:1.2.5_20.2.6_inc1.7"
+            "image": "amhe4269/bids-fmriprep:1.2.5_23.0.1_inc1.8"
         },
         "license": {
             "dependencies": [
@@ -467,5 +467,5 @@
     "name": "bids-fmriprep",
     "source": "https://github.com/nipreps/fmriprep",
     "url": "https://github.com/flywheel-apps/bids-fmriprep/blob/master/README.md",
-    "version": "1.2.5_20.2.6_inc1.7"
+    "version": "1.2.5_23.0.1_inc1.8"
 }

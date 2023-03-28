@@ -1,4 +1,4 @@
-FROM nipreps/fmriprep:20.2.6
+FROM nipreps/fmriprep:23.0.1
 
 LABEL maintainer="support@flywheel.io"
 
@@ -6,15 +6,16 @@ ENV FLYWHEEL /flywheel/v0
 WORKDIR ${FLYWHEEL}
 
 # Remove expired LetsEncrypt cert
-RUN rm /usr/share/ca-certificates/mozilla/DST_Root_CA_X3.crt && \
-    update-ca-certificates
+#RUN rm /usr/share/ca-certificates/mozilla/DST_Root_CA_X3.crt && \
+#    update-ca-certificates
+RUN update-ca-certificates
 ENV REQUESTS_CA_BUNDLE "/etc/ssl/certs/ca-certificates.crt"
 
 # Save docker environ here to keep it separate from the Flywheel gear environment
 RUN python -c 'import os, json; f = open("/flywheel/v0/gear_environ.json", "w"); json.dump(dict(os.environ), f)'
 
 RUN apt-get update && \
-    curl -sL https://deb.nodesource.com/setup_12.x | bash - && \
+    curl -sL https://deb.nodesource.com/setup_14.x | bash - && \
     apt-get install -y \
     time \
     zip \
