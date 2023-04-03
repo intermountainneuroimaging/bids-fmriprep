@@ -377,7 +377,10 @@ def main(gtk_context):
     )
 
     # Make archives for result *.html files for easy display on platform
-    zip_htmls(output_dir, destination_id, output_analysis_id_dir / BIDS_APP)
+    html_path = os.path.join(output_analysis_id_dir, BIDS_APP)
+    if not os.path.exists(html_path):
+        html_path = output_analysis_id_dir
+    zip_htmls(output_dir, destination_id, html_path)
 
     # possibly save ALL intermediate output
     if config.get("gear-save-intermediate-output"):

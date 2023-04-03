@@ -227,6 +227,11 @@
             "description": "skip generation of HTML and LaTeX formatted citation with pandoc",
             "type": "boolean"
         },
+        "me-output-echos": {
+            "default": false,
+            "description": "If running multiecho set to True",
+            "type": "boolean"
+        },
         "medial-surface-nan": {
             "default": false,
             "description": "Replace medial wall values with NaNs on functional GIFTI files. Only performed for GIFTI files mapped to a freesurfer subject (fsaverage or fsnative).",
@@ -256,6 +261,15 @@
             "default": 6,
             "description": "Maximum number of threads per-process.  Default is all available.",
             "type": "integer"
+        },
+        "output-layout": {
+            "default": "legacy",
+            "description": "Directory structure of output",
+            "enum": [
+                "bids",
+                "legacy"
+            ],
+            "type": "string"
         },
         "output-spaces": {
             "default": "",
@@ -351,13 +365,13 @@
         }
     },
     "custom": {
-        "docker-image": "amhe4269/bids-fmriprep:1.2.5_23.0.1_inc1.8",
+        "docker-image": "lsherbakov/bids-fmriprep:1.2.5_23.0.1_inc1.9",
         "flywheel": {
             "suite": "Preprocessing"
         },
         "gear-builder": {
             "category": "analysis",
-            "image": "amhe4269/bids-fmriprep:1.2.5_23.0.1_inc1.8"
+            "image": "lsherbakov/bids-fmriprep:1.2.5_23.0.1_inc1.9"
         },
         "license": {
             "dependencies": [
@@ -467,5 +481,5 @@
     "name": "bids-fmriprep",
     "source": "https://github.com/nipreps/fmriprep",
     "url": "https://github.com/flywheel-apps/bids-fmriprep/blob/master/README.md",
-    "version": "1.2.5_23.0.1_inc1.8"
+    "version": "1.2.5_23.0.1_inc1.9"
 }
