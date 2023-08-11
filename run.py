@@ -449,26 +449,24 @@ if __name__ == "__main__":
 
     # make sure /flywheel/v0 is writable, use a scratch directory if not
     with flywheel_gear_toolkit.GearToolkitContext() as gtk_context:
-    # with flywheel_gear_toolkit.GearToolkitContext(
-    #         config_path='bids-fmriprep-1.2.14_20.2.3_inc1.1-62ebeefe0b91eab5a47fc5e9/config.json', manifest_path='bids-fmriprep-1.2.14_20.2.3_inc1.1-62ebeefe0b91eab5a47fc5e9/manifest.json') as gtk_context:
         scratch_dir = run_in_tmp_dir(gtk_context.config["gear-writable-dir"])
 
     # Has to be instantiated twice here, since parent directories might have
     # changed
     with flywheel_gear_toolkit.GearToolkitContext() as gtk_context:
-    # with flywheel_gear_toolkit.GearToolkitContext(
-    #         config_path='/Users/lenasherbakov/Documents/work/fw_gears/fmriPrep/bids-fmriprep/bids-fmriprep-1.2.14_20.2.3_inc1.1-62ebeefe0b91eab5a47fc5e9/config.json',
-    #         manifest_path='/Users/lenasherbakov/Documents/work/fw_gears/fmriPrep/bids-fmriprep/bids-fmriprep-1.2.14_20.2.3_inc1.1-62ebeefe0b91eab5a47fc5e9/manifest.json') as gtk_context:
         return_code = main(gtk_context)
 
     # clean up (might be necessary when running in a shared computing environment)
-    if scratch_dir:
-        log.debug("Removing scratch directory")
-        for thing in scratch_dir.glob("*"):
-            if thing.is_symlink():
-                thing.unlink()  # don't remove anything links point to
-                log.debug("unlinked %s", thing.name)
-        shutil.rmtree(scratch_dir)
-        log.debug("Removed %s", scratch_dir)
+    try:
+        if scratch_dir:
+            log.debug("Removing scratch directory")
+            for thing in scratch_dir.glob("*"):
+                if thing.is_symlink():
+                    thing.unlink()  # don't remove anything links point to
+                    log.debug("unlinked %s", thing.name)
+            shutil.rmtree(scratch_dir)
+            log.debug("Removed %s", scratch_dir)
+    except OSError:
+        pass
 
     sys.exit(return_code)
